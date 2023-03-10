@@ -15,6 +15,7 @@ namespace consolapplication_adressbook.Services
 {
     public class MenuService
     {
+        //List<> är generic
         public List<IContact> contacts = new();       
         private FileService file = new();               
         public string FilePath { get; set; } = null!;
@@ -22,11 +23,11 @@ namespace consolapplication_adressbook.Services
 
         public void WelcomMenuService()
         {
-            Console.WriteLine("Välkommen till Adressboken");
+            Console.WriteLine("Välkommen till Adressboken\n");
             Console.WriteLine("1. Skapa en kontakt");
             Console.WriteLine("2. Visa alla kontakter");
             Console.WriteLine("3. Visa en specifik kontakt");
-            Console.WriteLine("4. Ta bort en specifik kontakt");
+            Console.WriteLine("4. Ta bort en specifik kontakt\n");
             Console.WriteLine("Välj ett av alternativen ovan: ");
             var choice = Console.ReadLine();
 
@@ -107,6 +108,7 @@ namespace consolapplication_adressbook.Services
                     Console.WriteLine("Det finns ingen kontakt, som har den namn i listan.\n");
                 }
 
+            // Console.WriteLine() är en metod som används för att skriva ut text till console window.
             Console.WriteLine("Tryck på valfri tangent för att gå tllbaka till huvudmenyn.");
             Console.ReadLine();
 
