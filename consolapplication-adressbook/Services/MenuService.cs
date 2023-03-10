@@ -100,7 +100,7 @@ namespace consolapplication_adressbook.Services
 
         private void DeleteSpecificContact()
         {
-            Console.WriteLine("Enter the name of contacts you want to delete ");
+            Console.WriteLine("Ange namnet på kontakten, som du vill att ta bort. ");
             string FirstName = Console.ReadLine() ?? "";
             var contact = contacts.Find(x => x.FirstName == FirstName);
             if (contact != null)
