@@ -111,19 +111,20 @@ namespace consolapplication_adressbook.Services
                 {
                     contacts.Remove((IContact)contact);
                     Console.WriteLine("Contact has been deleted successfully");
-                    return;
+                    Console.ReadLine();
                 }
                 else
                 {
 
                     Console.WriteLine("Kontakt har kvar i listan ");
-                    return;
+                    Console.ReadLine();
+                    
                 }
-
+                return;
             }
 
             Console.WriteLine("Det finns ingen kontakt, som har den namn.");
-
+            Console.ReadLine();
         }
 
 
