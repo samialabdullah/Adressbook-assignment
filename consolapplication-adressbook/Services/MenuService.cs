@@ -17,7 +17,6 @@ namespace consolapplication_adressbook.Services
     {
         public List<IContact> contacts = new();       
         private FileService file = new();               
-
         public string FilePath { get; set; } = null!;
 
 
@@ -29,10 +28,10 @@ namespace consolapplication_adressbook.Services
             Console.WriteLine("3. Visa en specifik kontakt");
             Console.WriteLine("4. Ta bort en specifik kontakt");
             Console.WriteLine("Välj ett av alternativen ovan: ");
-            var option = Console.ReadLine();
+            var choice = Console.ReadLine();
 
             
-            switch (option)
+            switch (choice)
             {
                 case "1": 
                     BuildContact(); 
@@ -47,7 +46,6 @@ namespace consolapplication_adressbook.Services
                     RemoveContact();
                     break;
             }
-
 
             file.Save(FilePath, JsonConvert.SerializeObject(new { contacts }));
         }
@@ -76,11 +74,16 @@ namespace consolapplication_adressbook.Services
         {
 
             Console.Clear();
-            Console.WriteLine("Visa alla kontakter : ");
-            foreach (var contact in contacts)
-                Console.WriteLine($"{contact.FirstName} {contact.LastName}  <{contact.Email}>");
+            Console.WriteLine("Visa alla kontakter : \n");
 
-            Console.WriteLine("Press any key to return to the main menu");
+            Console.WriteLine("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+            
+            foreach (var contact in contacts)
+            Console.WriteLine($"{contact.FirstName} {contact.LastName}  <{contact.Email}>\n");
+
+            Console.WriteLine("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+
+            Console.WriteLine("Tryck på valfri tangent för att gå tllbaka till huvudmenyn.");
             Console.ReadLine();
 
         }
@@ -91,18 +94,20 @@ namespace consolapplication_adressbook.Services
         {
 
             Console.WriteLine("Ange Förnamn på kontakten, som du vill att visa : ");
-            string? UserInputForName = Console.ReadLine();
-            var contactperson = contacts?.FirstOrDefault(x => x.FirstName == UserInputForName);
-            if (contactperson != null)
-            {
-                Console.WriteLine("----------------------------------------------------------------------------------------------------------");
-                Console.WriteLine($"FirstName: {contactperson.FirstName} \nLastName: {contactperson.LastName} \nEmail: {contactperson.Email} \nPhoneNumber: {contactperson.PhoneNumber} \nAddress: {contactperson.Address}");
-                Console.WriteLine("----------------------------------------------------------------------------------------------------------");
-            }
-            else
-                Console.WriteLine("There is no person with the name you entered in this list");
+            string? InputToName = Console.ReadLine();
+            var contactInList = contacts?.FirstOrDefault(x => x.FirstName == InputToName);
+                if (contactInList != null)
+                {
+                    Console.WriteLine("***********************************************************************************************************\n");
+                    Console.WriteLine($"FirstName: {contactInList.FirstName} \nLastName: {contactInList.LastName} \nEmail: {contactInList.Email} \nPhoneNumber: {contactInList.PhoneNumber} \nAddress: {contactInList.Address}\n");
+                    Console.WriteLine("***********************************************************************************************************\n");
+                }
+                else 
+                { 
+                    Console.WriteLine("Det finns ingen kontakt, som har den namn i listan.\n");
+                }
 
-            Console.WriteLine("Press any key to return to the main menu.");
+            Console.WriteLine("Tryck på valfri tangent för att gå tllbaka till huvudmenyn.");
             Console.ReadLine();
 
         }
@@ -130,20 +135,24 @@ namespace consolapplication_adressbook.Services
                         {
                             //Remove() är en metod som används för att ta bort ett element från en lista.
                             contacts.Remove((IContact)contact);
-                            Console.WriteLine("Kontakten har raderats");
+                            Console.WriteLine("Kontakten har raderats\n");
+                            Console.WriteLine("Tryck på valfri tangent för att gå tllbaka till huvudmenyn.");
                             Console.ReadLine();
                         }
                         else
                         {
 
-                            Console.WriteLine("Kontakt har kvar i listan ");
+                            Console.WriteLine("Kontakt har kvar i listan\n");
+                            Console.WriteLine("Tryck på valfri tangent för att gå tllbaka till huvudmenyn.");
                             Console.ReadLine();
                     
                         }
                     return;
                 }
 
-            Console.WriteLine("Det finns ingen kontakt, som har den namn.");
+            Console.WriteLine("Det finns ingen kontakt, som har den namn.\n");
+            Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+            Console.WriteLine("Tryck på valfri tangent för att gå tllbaka till huvudmenyn.");
             Console.ReadLine();
         }
 
