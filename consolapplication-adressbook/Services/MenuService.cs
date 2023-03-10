@@ -3,10 +3,12 @@ using consolapplication_adressbook.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 
 namespace consolapplication_adressbook.Services
@@ -32,17 +34,25 @@ namespace consolapplication_adressbook.Services
             
             switch (option)
             {
-                case "1": CreateContact(); break;
-                case "2": ViewAllContacts(); break;
-                case "3": ViewSpecificContact(); break;
-                case "4": DeleteSpecificContact(); break;
+                case "1": 
+                    BuildContact(); 
+                    break;
+                case "2": 
+                    ShowAllContacts(); 
+                    break;
+                case "3": 
+                    ShowIndividualContact();
+                    break;
+                case "4":
+                    RemoveContact();
+                    break;
             }
 
 
             file.Save(FilePath, JsonConvert.SerializeObject(new { contacts }));
         }
 
-        private void CreateContact()
+        private void BuildContact()
         {
             Console.Clear();
             Console.WriteLine("Välkommen till skapa en kontakt");
@@ -62,7 +72,7 @@ namespace consolapplication_adressbook.Services
         }
 
 
-        private void ViewAllContacts()
+        private void ShowAllContacts()
         {
 
             Console.Clear();
@@ -77,7 +87,7 @@ namespace consolapplication_adressbook.Services
 
 
 
-        private void ViewSpecificContact()
+        private void ShowIndividualContact()
         {
 
             Console.WriteLine("Ange Förnamn på kontakten, som du vill att visa : ");
@@ -98,7 +108,7 @@ namespace consolapplication_adressbook.Services
         }
 
 
-        private void DeleteSpecificContact()
+        private void RemoveContact()
         {
 
             // Console.WriteLine() är en metod som används för att skriva ut text till console window.
@@ -107,27 +117,31 @@ namespace consolapplication_adressbook.Services
             // Console.ReadLine() är en metod som används för att läsa en rad input text från console window.
             string FirstName = Console.ReadLine() ?? "";
 
-            //
+            // Find() är en metod används för att söka efter ett element i en lista.
             var contact = contacts.Find(x => x.FirstName == FirstName);
-            if (contact != null)
-            {
-                Console.WriteLine("Är du säker på att du vill ta bort den kontakten? Skriv 'ja' om ja:");
-                string anser = Console.ReadLine() ?? "".Trim();
-                if (string.Compare(anser, "ja", true) == 0)
-                {
-                    contacts.Remove((IContact)contact);
-                    Console.WriteLine("Kontakten har raderats");
-                    Console.ReadLine();
-                }
-                else
-                {
 
-                    Console.WriteLine("Kontakt har kvar i listan ");
-                    Console.ReadLine();
+                if (contact != null)
+                {
+                    Console.WriteLine("Är du säker på att du vill ta bort den kontakten? Skriv 'ja' om ja:");
+                    string anser = Console.ReadLine() ?? "".Trim();
+
+                //Compare() är en metod som används för att jämföra två objekt och bestämma deras relativa ordning.
+                if (string.Compare(anser, "ja", true) == 0)
+                        {
+                            //Remove() är en metod som används för att ta bort ett element från en lista.
+                            contacts.Remove((IContact)contact);
+                            Console.WriteLine("Kontakten har raderats");
+                            Console.ReadLine();
+                        }
+                        else
+                        {
+
+                            Console.WriteLine("Kontakt har kvar i listan ");
+                            Console.ReadLine();
                     
+                        }
+                    return;
                 }
-                return;
-            }
 
             Console.WriteLine("Det finns ingen kontakt, som har den namn.");
             Console.ReadLine();
