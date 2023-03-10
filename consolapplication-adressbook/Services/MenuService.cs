@@ -105,12 +105,12 @@ namespace consolapplication_adressbook.Services
             var contact = contacts.Find(x => x.FirstName == FirstName);
             if (contact != null)
             {
-                Console.WriteLine("Are you sure you want to delete it? Write 'yes' if yes:");
+                Console.WriteLine("Är du säker på att du vill ta bort den kontakten? Skriv 'ja' om ja:");
                 string anser = Console.ReadLine() ?? "".Trim();
-                if (string.Compare(anser, "yes", true) == 0)
+                if (string.Compare(anser, "ja", true) == 0)
                 {
                     contacts.Remove((IContact)contact);
-                    Console.WriteLine("Contact has been deleted successfully");
+                    Console.WriteLine("Kontakten har raderats");
                     Console.ReadLine();
                 }
                 else
