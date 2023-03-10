@@ -100,8 +100,14 @@ namespace consolapplication_adressbook.Services
 
         private void DeleteSpecificContact()
         {
+
+            // Console.WriteLine() är en metod som används för att skriva ut text till console window.
             Console.WriteLine("Ange namnet på kontakten, som du vill att ta bort. ");
+
+            // Console.ReadLine() är en metod som används för att läsa en rad input text från console window.
             string FirstName = Console.ReadLine() ?? "";
+
+            //
             var contact = contacts.Find(x => x.FirstName == FirstName);
             if (contact != null)
             {
