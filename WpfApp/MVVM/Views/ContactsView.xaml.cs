@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp.MVVM.Models;
+using WpfApp.Services;
 
 namespace WpfApp.MVVM.Views
 {
@@ -23,6 +25,39 @@ namespace WpfApp.MVVM.Views
         public ContactsView()
         {
             InitializeComponent();
+        }
+
+        private void btn_Edit_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var contact = (ContactModel)button.DataContext;
+        }
+
+        private void btn_Remove_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var contact = (ContactModel)button.DataContext;
+
+
+            ContactService.Remove(contact);
+            
+        }
+
+        private void ListView_Selected(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var contact = (ContactModel)button.DataContext;
+
+            MessageBox.Show(contact.DisplayName);
+
+        }
+
+        private void Border_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var border = (Border)sender;
+            var contact = (ContactModel)border.DataContext;
+
+            MessageBox.Show(contact.DisplayName);
         }
     }
 }
