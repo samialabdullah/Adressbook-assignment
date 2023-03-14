@@ -46,8 +46,11 @@
                 </ListView.ItemTemplate>
                 
             </ListView>
-            
-            
+
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="{Binding SelectedContact.DisplayName}" />
+                <Button Command="{Binding RemoveCommand}" Content="Remove" />
+            </StackPanel>
             
         </Grid>
     </Grid>

@@ -43,21 +43,6 @@ namespace WpfApp.MVVM.Views
             
         }
 
-        private void ListView_Selected(object sender, RoutedEventArgs e)
-        {
-            var button = (Button)sender;
-            var contact = (ContactModel)button.DataContext;
 
-            MessageBox.Show(contact.DisplayName);
-
-        }
-
-        private void Border_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            var border = (Border)sender;
-            var contact = (ContactModel)border.DataContext;
-
-            MessageBox.Show(contact.DisplayName);
-        }
     }
 }

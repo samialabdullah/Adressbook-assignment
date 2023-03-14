@@ -1,28 +1,36 @@
-﻿using System.Collections.ObjectModel;
-using WpfApp.MVVM.Models;
+﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using WpfApp.MVVM.Models;
+
 
 namespace WpfApp.Services
 {
     public static class ContactService
     {
-        private static ObservableCollection<ContactModel>  contacts = new ObservableCollection<ContactModel>() 
+        private static ObservableCollection<ContactModel> contacts;
+        private static FileService fileService = new FileService($@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\content.json");
+        static ContactService()
         {
-            new ContactModel() { FirstName = "Hans", LastName = "Mattin-lassei", Email = "hans@domain.com" }, 
-            new ContactModel() { FirstName = "Joakim", LastName = "Wahlström", Email = "hans@domain.com" }
-        }; 
+            try
+            {
+                contacts = JsonConvert.DeserializeObject<ObservableCollection<ContactModel>>(fileService.Read())!;
+            } 
+            catch { contacts = new ObservableCollection<ContactModel>(); }
+        }
+
+
+
 
         public static void Add(ContactModel model)
         {
             contacts.Add(model);
+            fileService.Save(JsonConvert.SerializeObject(contacts));
         }
         public static void Remove(ContactModel model) 
         {  
-            contacts.Remove(model); 
+            contacts.Remove(model);
+            fileService.Save(JsonConvert.SerializeObject(contacts));
         }
 
         public static ObservableCollection<ContactModel> Contacts()

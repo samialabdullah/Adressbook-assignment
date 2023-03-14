@@ -17,5 +17,11 @@ namespace WpfApp.MVVM.ViewModels
 
         [ObservableProperty]
         private ContactModel selectedContact = null!;
+
+        [RelayCommand]
+        public void Remove() 
+        {
+            ContactService.Remove(SelectedContact);
+        }
     }
 }
