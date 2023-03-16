@@ -1,29 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using WpfApp.MVVM.ViewModels;
 
-namespace WpfApp
+namespace WpfApp;
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    protected override void OnStartup(StartupEventArgs e)
     {
-        protected override void OnStartup(StartupEventArgs e)
+        MainWindow = new MainWindow()
         {
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel()
+            DataContext = new MainViewModel()
+        };
 
-            };
-            MainWindow.Show();
-            base.OnStartup(e);
-        }
-
+        MainWindow.Show();
+        base.OnStartup(e);
     }
 }

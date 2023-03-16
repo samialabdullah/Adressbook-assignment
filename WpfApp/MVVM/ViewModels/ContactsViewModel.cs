@@ -1,27 +1,46 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
 using WpfApp.MVVM.Models;
-using WpfApp.Services;
 
-namespace WpfApp.MVVM.ViewModels
+namespace WpfApp.MVVM.ViewModels;
+
+public partial class ContactsViewModel : ObservableObject
 {
-    public partial class ContactsViewModel : ObservableObject
+
+    [ObservableProperty]
+    private string firstName = string.Empty;
+    
+    [ObservableProperty]
+    private string lastName = string.Empty;
+
+    [ObservableProperty]
+    private string email = string.Empty;
+
+
+    [ObservableProperty]
+    private string phoneNumber = string.Empty;
+
+    [ObservableProperty]
+    private string address = string.Empty;
+
+
+  
+
+    [ObservableProperty]
+    private ObservableCollection<ContactModel> contacts = null!;
+
+    public ContactsViewModel()
     {
-        [ObservableProperty]
-        private string title = "Contacts";
 
-        [ObservableProperty]
-        private ObservableCollection<ContactModel> contacts = ContactService.Contacts();
+    }
 
-        [ObservableProperty]
-        private ContactModel selectedContact = null!;
+    public ContactsViewModel(ContactModel selectedContact)
+    {
+        firstName = selectedContact.FirstName;
+        lastName = selectedContact.LastName;
+        phoneNumber = selectedContact.PhoneNumber;
+        email = selectedContact.Email;
+        address = selectedContact.Address;
 
-        [RelayCommand]
-        public void Remove() 
-        {
-            ContactService.Remove(SelectedContact);
-        }
     }
 }

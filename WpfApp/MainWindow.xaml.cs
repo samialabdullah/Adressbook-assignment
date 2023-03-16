@@ -1,28 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using WpfApp.MVVM.Models;
+using WpfApp.Services;
 
-namespace WpfApp
+namespace WpfApp;
+
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+
+    public MainWindow()
     {
-        public MainWindow()
+        InitializeComponent();
+    }
+
+    private void Btn_Remove_Click(object sender, RoutedEventArgs e)
+    {
+        var button = sender as Button;
+        var contact = (ContactModel)button!.DataContext;
+
+        if (MessageBox.Show("Are you sure you want to delete the contact?",
+            "Remove contact",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning) == MessageBoxResult.Yes)
         {
-            InitializeComponent();
+            ContactService.Remove(contact);
         }
     }
 }

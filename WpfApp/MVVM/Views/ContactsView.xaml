@@ -3,55 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfApp.MVVM.Views" 
-             xmlns:viewmodels="clr-namespace:WpfApp.MVVM.ViewModels" 
-             d:DataContext="{d:DesignInstance Type=viewmodels:ContactsViewModel}"
-             xmlns:models="clr-namespace:WpfApp.MVVM.Models"
+             xmlns:local="clr-namespace:WpfApp.MVVM.Views"
+             xmlns:viewmodels="clr-namespace:WpfApp.MVVM.ViewModels"
+             xmlns:models="clr-namespace:WpfApp.MVVM.Models" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+             d:DataContext="{d:DesignInstance Type=viewmodels:ContactsViewModel}" 
+             Height="400" Width="350">
 
-        <TextBlock Grid.Row="0" Text="Contacts" FontSize="24" Margin="0 0 0 20" />
-        
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
 
-            <ListView Background="Transparent" ItemsSource="{Binding Contacts}" HorizontalContentAlignment="Stretch" SelectionMode="Single" SelectedItem="{Binding SelectedContact}" >
-                <ListView.ItemTemplate>
-                    <DataTemplate DataType="{x:Type models:ContactModel}">
-                        <Grid Margin="0 5 0 5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="auto" />
-                            </Grid.ColumnDefinitions>
+        <Grid Margin="0 5 50 5" Background="Wheat">
 
-                            <StackPanel Grid.Column="0" HorizontalAlignment="Left">
-                                <TextBlock Text="{Binding DisplayName}" />
-                                <TextBlock Text="{Binding Email}" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button x:Name="btn_Edit" Click="btn_Edit_Click"  Content="Edit" Width="50" Margin="5 0 0 0" />
-                                <Button x:Name="btn_Remove" Click="btn_Remove_Click" Content="Remove" Width="50" Margin="5 0 0 0" />
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate> 
-                    
-                </ListView.ItemTemplate>
-                
-            </ListView>
+        <Grid HorizontalAlignment="Center" Margin="0 0 0 0">
 
-            <StackPanel Grid.Column="1">
-                <TextBlock Text="{Binding SelectedContact.DisplayName}" />
-                <Button Command="{Binding RemoveCommand}" Content="Remove" />
-            </StackPanel>
-            
+            <TextBlock Margin="0 60 0 0"  Text="-Kontaktinformation-" FontWeight="Medium" FontSize="18"/>
+
+            <TextBlock Margin="35 150 0 0" Text="Förnamn" FontSize="16" />
+
+            <TextBlock Margin="30 180 0 0" Text="Efternamn" FontSize="16" />
+
+            <TextBlock Margin="40 220 0 0" Text="E-Mail" FontSize="16" />
+
+            <TextBlock Margin="23 260 0 0" Text="Telefonnummer" FontSize="16" />
+
+            <TextBlock Margin="40 300 0 0" Text="Address" FontSize="16" />
+
         </Grid>
     </Grid>
 </UserControl>

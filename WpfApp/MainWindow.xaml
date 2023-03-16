@@ -3,31 +3,76 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewmodels="clr-namespace:WpfApp.MVVM.ViewModels"
-        xmlns:views="clr-namespace:WpfApp.MVVM.Views"
         xmlns:local="clr-namespace:WpfApp"
+        xmlns:models="clr-namespace:WpfApp.MVVM.Models"
+        xmlns:viewmodels="clr-namespace:WpfApp.MVVM.ViewModels"
+        xmlns:views="clr-namespace:WpfApp.MVVM.Views" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"  
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ADDRESS BOOK" Height="570" Width="860">
+    
+    
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60" />
-            <ColumnDefinition /> 
-        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0">
+            <Button Command="{Binding GoToContactsCommand}" Content="INFO" Margin="0 5 0 0" Background="LightGoldenrodYellow" BorderThickness="0" Foreground="Black"   />
+            <Button Command="{Binding GoToAddContactCommand}" Content="ADD" Margin="0 10 0 0"  Background="LightGoldenrodYellow" BorderThickness="0" Foreground="Black" />
+            </StackPanel>
+            
+            <Grid Grid.Column="1" Margin="20 5 0 20" Name="Selected">
+                
+                <ListView BorderThickness="0" ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedContact}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding GoToContactsCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="models:ContactModel">
+                            <StackPanel Margin="0 5 0 5" >
+                                <Grid>
+                                    <StackPanel Margin="5 5 5 5">
+                                        <TextBlock FontWeight="Bold" Text="{Binding DisplayName}" />
+                                        <TextBlock Text="{Binding Email}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="200 0 0 0" >
+                                        <Button Content="UPDATE" Margin="0 0 5 0" Padding="5" VerticalAlignment="Center" Background="Gray" BorderThickness="0" Foreground="White" FontWeight="Bold">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                                    <i:InvokeCommandAction Command="{Binding Path=DataContext.GoToEditContactCommand, ElementName=Selected}" CommandParameter="{Binding .}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Button>
+                                        <Button Click="Btn_Remove_Click" Content="DELETE" Grid.Column="1" BorderThickness="0" Padding="5" VerticalAlignment="Center" Background="Red" Foreground="White" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
 
-        <StackPanel Grid.Column="0">
-            <Button Command="{Binding GoToAddContactCommand}" Height="40" Width="40" Margin="0 0 0 10" />
-            <Button Command="{Binding GoToContactsCommand}" Height="40" Width="40" Margin="0 0 0 10" />
-        </StackPanel>
-
-        <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}">
-            <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type viewmodels:AddContactViewModel}">
-                    <views:AddContactView />
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewmodels:ContactsViewModel}">
-                    <views:ContactsView />
-                </DataTemplate>
-            </ContentControl.Resources> 
-        </ContentControl>
+            <ContentControl Grid.Column="2" Content="{Binding CurrentViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type viewmodels:ContactsViewModel}">
+                        <views:ContactsView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:AddContactViewModel}">
+                        <views:AddContactView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:EditContactViewModel}">
+                        <views:EditContactView />
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </Grid>
+        
     </Grid>
 </Window>

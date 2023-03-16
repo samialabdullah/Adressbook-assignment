@@ -1,41 +1,50 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using WpfApp.MVVM.Models;
 
+namespace WpfApp.Services;
 
-namespace WpfApp.Services
+public static class ContactService
 {
-    public static class ContactService
+    private static FileService fileService;
+
+    private static ObservableCollection<ContactModel> contacts;
+
+    static ContactService()
     {
-        private static ObservableCollection<ContactModel> contacts;
-        private static FileService fileService = new FileService($@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\content.json");
-        static ContactService()
+        fileService = new FileService();
+        contacts = fileService.ReadFromFile();
+    }
+
+    public static void Add(ContactModel contact)
+    {
+        contacts.Add(contact);
+        fileService.SaveToFile(contacts);
+    }
+
+    public static void Remove(ContactModel contact)
+    {
+        contacts.Remove(contact);
+        fileService.SaveToFile(contacts);
+    }
+    
+    public static void Edit(ContactModel selectedContact)
+    {
+        if (selectedContact != null)
         {
-            try
-            {
-                contacts = JsonConvert.DeserializeObject<ObservableCollection<ContactModel>>(fileService.Read())!;
-            } 
-            catch { contacts = new ObservableCollection<ContactModel>(); }
+            ContactModel catchContact = contacts.FirstOrDefault(x => x.Id == selectedContact.Id)!;
+
+            if(catchContact != null)
+                Remove(catchContact);
+
+            Add(selectedContact);
+
+            fileService.SaveToFile(contacts);
         }
+    }
 
-
-
-
-        public static void Add(ContactModel model)
-        {
-            contacts.Add(model);
-            fileService.Save(JsonConvert.SerializeObject(contacts));
-        }
-        public static void Remove(ContactModel model) 
-        {  
-            contacts.Remove(model);
-            fileService.Save(JsonConvert.SerializeObject(contacts));
-        }
-
-        public static ObservableCollection<ContactModel> Contacts()
-        {
-            return contacts;
-        }
+    public static ObservableCollection<ContactModel> Get()
+    {
+        return contacts;
     }
 }

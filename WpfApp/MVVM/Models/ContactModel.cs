@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace WpfApp.MVVM.Models
+namespace WpfApp.MVVM.Models;
+
+public class ContactModel 
 {
-    public class ContactModel
-    {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-
-        public string DisplayName => $"{FirstName} {LastName}";
-      
-
-    }
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public string FirstName { get; set; } = null!;
+    public string LastName { get; set; } = null!;
+    public string Email { get; set; } = null!;
+    public string PhoneNumber { get; set; } = null!; 
+    public string Address { get; set; } = null!;
+   
+    public string DisplayName => $"{FirstName} {LastName}";
 }

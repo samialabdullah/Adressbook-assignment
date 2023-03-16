@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="WpfApp.MVVM.Views.EditContactView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp.MVVM.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="400">
+    
+    
+    <Grid Margin="1 30 30 20" Background="Azure">
+        <StackPanel Margin="20 1 25 1">
+            <TextBlock Text="Uppdatera kontakt" FontSize="18" Margin="60 15 1 15" FontWeight="SemiBold" />
+
+            <TextBlock Text="Förnamn*" FontSize="16"/>
+            <TextBox Padding="2" Margin="1 3 3 8" Text="{Binding FirstName}" />
+
+            <TextBlock Text="Efternamn*" FontSize="16"/>
+            <TextBox Padding="2" Margin="1 3 3 8" Text="{Binding LastName}" />
+
+            <TextBlock Text="E-mail*" FontSize="16"/>
+            <TextBox Padding="2" Margin="1 3 3 8" Text="{Binding Email}"/>
+
+            <TextBlock Text="Telefonnummer" FontSize="16"/>
+            <TextBox Padding="2" Margin="1 3 3 8" Text="{Binding PhoneNumber}" />
+
+            <TextBlock Text="Address" FontSize="16"/>
+            <TextBox Padding="2" Margin="1 3 3 8" Text="{Binding Address}"/>
+
+
+            <Button Content="SPARA UPPDATERING" Command="{Binding SaveEditsCommand}" Background="lightGreen" Margin="3 50 3 8" BorderThickness="2" Padding="6 6 6 6" FontSize="15" FontWeight="Medium" />
+        </StackPanel>
+        
+    </Grid>
+</UserControl>

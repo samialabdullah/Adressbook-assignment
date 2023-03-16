@@ -4,9 +4,39 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp.MVVM.Views"
+             xmlns:viewmodels="clr-namespace:WpfApp.MVVM.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="{Binding Title}" />
+             d:DataContext="{d:DesignInstance Type=viewmodels:ContactsViewModel}" 
+             Height="450" Width="400">
+
+    <Grid Margin="5 1 60 30" Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="231*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="20,1,20,1" Grid.RowSpan="2">
+
+            <TextBlock Text="Lägger till Kontakt" FontSize="18" Margin="60 15 1 15" FontWeight="Regular" />
+
+            <TextBlock Text="Förnamn" FontSize="16" />
+            <TextBox Padding="4" Margin="0 3 0 15" Text="{Binding FirstName}" />
+
+            <TextBlock Text="Last Name"/>
+            <TextBox Padding="3" Margin="0 0 0 10" Text="{Binding LastName}" />
+
+            <TextBlock Text="Email"/>
+            <TextBox Padding="3" Margin="0 0 0 10" Text="{Binding Email}"/>
+
+            <TextBlock Text="Phone Number"/>
+            <TextBox Padding="3" Margin="0 0 0 10" Text="{Binding PhoneNumber}" />
+
+            <TextBlock Text="Address"/>
+            <TextBox Padding="3" Margin="0 0 0 10" Text="{Binding Address}"/>
+
+
+
+            <Button Command="{Binding AddContactCommand}" Content="Create Contact" BorderThickness="0" Padding="5 5 5 5" Margin="0 60 0 10" Background="LightGoldenrodYellow"/>
+        </StackPanel>
+
     </Grid>
 </UserControl>
