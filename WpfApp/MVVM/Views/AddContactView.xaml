@@ -16,26 +16,26 @@
         </Grid.RowDefinitions>
         <StackPanel Margin="20,1,20,1" Grid.RowSpan="2">
 
-            <TextBlock Text="Lägger till Kontakt" FontSize="18" Margin="60 15 1 15" FontWeight="Regular" />
+            <TextBlock Text="Lägger till Kontakt" FontSize="18" Margin="60 15 1 10" FontWeight="Regular" />
 
-            <TextBlock Text="Förnamn" FontSize="16" />
+            <TextBlock Text="Förnamn*" FontSize="16" />
             <TextBox Padding="4" Margin="0 3 0 15" Text="{Binding FirstName}" />
 
-            <TextBlock Text="Last Name"/>
-            <TextBox Padding="3" Margin="0 0 0 10" Text="{Binding LastName}" />
+            <TextBlock Text="Efternamn*" FontSize="16" />
+            <TextBox Padding="4" Margin="0 3 0 15" Text="{Binding LastName}" />
 
-            <TextBlock Text="Email"/>
-            <TextBox Padding="3" Margin="0 0 0 10" Text="{Binding Email}"/>
+            <TextBlock Text="E-Mail*" FontSize="16"/>
+            <TextBox Padding="4" Margin="0 3 0 15" Text="{Binding Email}"/>
 
-            <TextBlock Text="Phone Number"/>
-            <TextBox Padding="3" Margin="0 0 0 10" Text="{Binding PhoneNumber}" />
+            <TextBlock Text="Telefonnummer" FontSize="16" />
+            <TextBox Padding="3" Margin="0 3 0 15" Text="{Binding PhoneNumber}" />
 
-            <TextBlock Text="Address"/>
-            <TextBox Padding="3" Margin="0 0 0 10" Text="{Binding Address}"/>
+            <TextBlock Text="Address" FontSize="16" />
+            <TextBox Padding="3" Margin="0 3 0 15" Text="{Binding Address}"/>
 
 
 
-            <Button Command="{Binding AddContactCommand}" Content="Create Contact" BorderThickness="0" Padding="5 5 5 5" Margin="0 60 0 10" Background="LightGoldenrodYellow"/>
+            <Button Command="{Binding AddContactCommand}" Content="Skapa-Kontakt" BorderThickness="1" Padding="0 0" Margin="8 8" Background="Bisque" FontSize="18" />
         </StackPanel>
 
     </Grid>
