@@ -4,7 +4,8 @@ using System.Collections.ObjectModel;
 using WpfApp.MVVM.Models;
 using WpfApp.Services;
 
-namespace WpfApp.MVVM.ViewModels;
+namespace WpfApp.MVVM.ViewModels
+{
 
 public partial class MainViewModel : ObservableObject
 {
@@ -33,10 +34,7 @@ public partial class MainViewModel : ObservableObject
             CurrentViewModel = new ContactsViewModel();
     }
 
-    /// <summary>
-    /// The method takes an object parameter "sender", which is cast to a ContactModel type and stored in the "contact" variable.
-    /// </summary>
-    /// <param name="sender"></param>
+
     [RelayCommand]
     public void GoToEditContact(object sender)
     {
@@ -49,12 +47,11 @@ public partial class MainViewModel : ObservableObject
     }
 
 
-    /// <summary>
-    /// The MainViewModel constructor sets the initial view model to the ContactsViewModel and populates the contacts list using the ContactService.Get() method.
-    /// </summary>
     public MainViewModel()
     {
         CurrentViewModel = new ContactsViewModel();
         contacts = ContactService.Get();
     }
+}
+
 }

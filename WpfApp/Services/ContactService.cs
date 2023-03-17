@@ -2,7 +2,8 @@
 using System.Linq;
 using WpfApp.MVVM.Models;
 
-namespace WpfApp.Services;
+namespace WpfApp.Services
+{ 
 
 public static class ContactService
 {
@@ -47,4 +48,7 @@ public static class ContactService
     {
         return contacts;
     }
+}
+
+
 }

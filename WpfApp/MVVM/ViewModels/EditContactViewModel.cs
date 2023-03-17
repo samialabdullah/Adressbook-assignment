@@ -3,8 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using WpfApp.MVVM.Models;
 using WpfApp.Services;
 
-namespace WpfApp.MVVM.ViewModels;
-
+namespace WpfApp.MVVM.ViewModels
+{ 
 public partial class EditContactViewModel : ObservableObject
 {
     private ContactModel outdatedContacts;
@@ -68,4 +68,7 @@ public partial class EditContactViewModel : ObservableObject
 
         ContactService.Edit(updatedContact);
     }
+}
+
+
 }

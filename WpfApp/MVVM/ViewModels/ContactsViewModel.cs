@@ -2,7 +2,8 @@
 using System.Collections.ObjectModel;
 using WpfApp.MVVM.Models;
 
-namespace WpfApp.MVVM.ViewModels;
+namespace WpfApp.MVVM.ViewModels
+{ 
 
 public partial class ContactsViewModel : ObservableObject
 {
@@ -16,13 +17,11 @@ public partial class ContactsViewModel : ObservableObject
     [ObservableProperty]
     private string email = string.Empty;
 
-
     [ObservableProperty]
     private string phoneNumber = string.Empty;
 
     [ObservableProperty]
     private string address = string.Empty;
-
 
   
 
@@ -43,4 +42,6 @@ public partial class ContactsViewModel : ObservableObject
         address = selectedContact.Address;
 
     }
+}
+
 }

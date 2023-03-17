@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace WpfApp.MVVM.Models;
+namespace WpfApp.MVVM.Models
+{ 
 
 public class ContactModel 
 {
@@ -12,4 +13,6 @@ public class ContactModel
     public string Address { get; set; } = null!;
    
     public string DisplayName => $"{FirstName} {LastName}";
+}
+
 }

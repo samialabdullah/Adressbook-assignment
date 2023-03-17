@@ -4,7 +4,8 @@ using System.Collections.ObjectModel;
 using System.IO;
 using WpfApp.MVVM.Models;
 
-namespace WpfApp.Services;
+namespace WpfApp.Services
+{ 
 
 internal class FileService
 {
@@ -25,4 +26,6 @@ internal class FileService
         using var sw = new StreamWriter(filePath);
         sw.WriteLine(JsonConvert.SerializeObject(contacts));
     }
+}
+
 }

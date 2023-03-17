@@ -4,7 +4,8 @@ using System.Collections.ObjectModel;
 using WpfApp.MVVM.Models;
 using WpfApp.Services;
 
-namespace WpfApp.MVVM.ViewModels;
+namespace WpfApp.MVVM.ViewModels
+{
 public partial class AddContactViewModel : ObservableObject
 {
     public AddContactViewModel()
@@ -57,4 +58,6 @@ public partial class AddContactViewModel : ObservableObject
         Address = string.Empty;
         
     }
+}
+
 }
