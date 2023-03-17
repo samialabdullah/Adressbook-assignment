@@ -4,12 +4,12 @@
 namespace WpfApp.MVVM.Views
 { 
 
-public partial class EditContactView : UserControl
-{
-    public EditContactView()
+    public partial class EditContactView : UserControl
     {
-        InitializeComponent();
+        public EditContactView()
+        {
+            InitializeComponent();
+        }
     }
-}
 
 }

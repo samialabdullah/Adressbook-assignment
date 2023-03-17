@@ -5,50 +5,50 @@ using WpfApp.MVVM.Models;
 namespace WpfApp.Services
 { 
 
-public static class ContactService
-{
-    private static FileService fileService;
-
-    private static ObservableCollection<ContactModel> contacts;
-
-    static ContactService()
+    public static class ContactService
     {
-        fileService = new FileService();
-        contacts = fileService.ReadFromFile();
-    }
+        private static FileService fileService;
 
-    public static void Add(ContactModel contact)
-    {
-        contacts.Add(contact);
-        fileService.SaveToFile(contacts);
-    }
+        private static ObservableCollection<ContactModel> contacts;
 
-    public static void Remove(ContactModel contact)
-    {
-        contacts.Remove(contact);
-        fileService.SaveToFile(contacts);
-    }
-    
-    public static void Edit(ContactModel selectedContact)
-    {
-        if (selectedContact != null)
+        static ContactService()
         {
-            ContactModel catchContact = contacts.FirstOrDefault(x => x.Id == selectedContact.Id)!;
+            fileService = new FileService();
+            contacts = fileService.ReadFromFile();
+        }
 
-            if(catchContact != null)
-                Remove(catchContact);
-
-            Add(selectedContact);
-
+        public static void Add(ContactModel contact)
+        {
+            contacts.Add(contact);
             fileService.SaveToFile(contacts);
         }
-    }
 
-    public static ObservableCollection<ContactModel> Get()
-    {
-        return contacts;
+        public static void Remove(ContactModel contact)
+        {
+            contacts.Remove(contact);
+            fileService.SaveToFile(contacts);
+        }
+    
+        public static void Edit(ContactModel selectedContact)
+        {
+            if (selectedContact != null)
+            {
+                ContactModel catchContact = contacts.FirstOrDefault(x => x.Id == selectedContact.Id)!;
+
+                if(catchContact != null)
+                    Remove(catchContact);
+
+                Add(selectedContact);
+
+                fileService.SaveToFile(contacts);
+            }
+        }
+
+        public static ObservableCollection<ContactModel> Get()
+        {
+            return contacts;
+        }
     }
-}
 
 
 }
